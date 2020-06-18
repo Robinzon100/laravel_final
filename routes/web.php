@@ -26,8 +26,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/jobs', 'jobsController@getJobs')->name('jobs');
 
 Route::get('/admin/Admin', 'admin\AdminController@getAdmin')->name('admin');
-Route::post('/admin/jobs/insert', 'admin\AdminController@insertJobs')->name('job_inser');
-Route::post('/admin/jobs/delete', 'admin\AdminController@deleteJobs')->name('job_delete');
-
-Route::get('/admin/jobs/update/{id}', 'admin\AdminController@getUpdateJobs')->name('job_update_get');
-Route::post('/admin/jobs/updateJobs', 'admin\AdminController@updateJob')->name('job_update');
+Route::post('/vacancy/insert', 'admin\AdminController@insertVacancy')->name('vacancy_insert');
+Route::get('/vacancy', 'admin\AdminController@getVacancy')->name('vacancy_get');
+Route::post('/vacancy/delete/{id}', 'admin\AdminController@deleteVacancy')->name('job_update_get');
+Route::post('/vacancy/update/{id}', 'admin\AdminController@updateVacancy')->name('job_update_get');
+Route::get('/vacancy/update/{id}', 'admin\AdminController@getUpdateVacancy')->name('job_update_get');

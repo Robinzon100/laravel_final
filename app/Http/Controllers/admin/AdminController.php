@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\jobs;
+use App\Vacancy;
+use App\Company;
 
 
 
@@ -15,58 +16,83 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('Isadmin');
+        // $this->middleware('Isadmin');
     }
     
     public function getAdmin(Request $request)
     {
-        $jobs = jobs::get();
-        // print_r($jobs);
-        return view('admin.Admin', compact('jobs'));
+        $Company = Company::get();
+        // print_r($Company);
+        return view('admin.Admin', compact('Company'));
     }
 
-    public function insertJobs(Request $req)
+    public function insertCompany(Request $req)
     {
-        $this->validate($req, [
-            "title" => "required|string",
-            "descirption" => "required|string",
-            "company" => "required|string",
-            "price" => "numeric",
-        ]);
+
+        $createdAt = date("Y-m-d H:i:s",mt_rand(1262055681,1262055681));
+        
+        $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),5,10);
+        $code_id = substr(str_shuffle('0123456789'),0 , 9);
+        $password = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(5/strlen($x)) )),5,10);
+
+     
 
 
-
-
-        $title = $req->input('title');
-        $descirption = $req->input('descirption');
-        $company = $req->input('company');
-        $price = $req->input('price');
-
-        if ($req->input('fullTime') == "on") {
-            $fullTime = true;
-        }else{
-            $fullTime = false;
-        }
-
-
-        DB::table('jobs')->insert(
+        DB::table('companies')->insert(
             [
-                'title' => $title,
-                'descirption' => $descirption,
-                'company' => $company,
-                'price' => $price,
-                'fullTime' => $fullTime
+                'name' => $name,
+                'code_id' => $code_id,
+                'createdAt' => $createdAt,
+                'password' => $password,
             ]
         );
         return back()
-            ->with('success', 'You have successfully upload file.');
+            ->with('success', 'You have successfully upload ');
 
         // return redirect('admin/books/view');
     }
 
+
+
+
+
+    public function getVacancy(Request $request)
+    {
+        $Vacancy = Vacancy::get();
+        // print_r($Vacancy);
+        return view('Vacancy', compact('Vacancy'));
+    }
+
+    public function insertVacancy(Request $req)
+    {
+
+        
+        $name = $req->input('name');
+        $description = $req->input('description');
+        $company_id = 1;
+
+     
+
+
+        DB::table('vacancies')->insert(
+            [
+                'name' => $name,
+                'description' => $description,
+                'Company_id' => $company_id
+            ]
+        );
+        return back()
+            ->with('success', 'You have successfully upload ');
+
+        // return redirect('admin/books/view');
+    }
+
+
     
 
-    public function deleteJobs(Request $req)
+    
+
+    public function deleteVacancy(Request $req)
     {
 
         $this->validate($req, [
@@ -74,77 +100,77 @@ class AdminController extends Controller
         ]);
         $id = $req->input('id');
         
-        jobs::where('id', $id)->delete();
+        Vacancy::where('id', $id)->delete();
 
         return back();
     }
 
 
 
-    public function getUpdateJobs($id)
-    {
+    // public function getUpdateVacancy($id)
+    // {
 
 
-        $toret = DB::table('jobs')
-            ->where('id', $id)
-            ->first();
+    //     $toret = DB::table('vacancies')
+    //         ->where('id', $id)
+    //         ->first();
 
 
-        if (
-            !DB::table('jobs')
-                ->where('id', $id)
-                ->count() > 0
-        ) {
-            exit();
-        }
+    //     if (
+    //         !DB::table('vacancies')
+    //             ->where('id', $id)
+    //             ->count() > 0
+    //     ) {
+    //         exit();
+    //     }
 
         
         
-        return view('admin/update', ["post" => $toret]);
-    }
+    //     return view('admin/update', ["post" => $toret]);
+    // }
   
 
-    protected function updateJob(Request $req)
-    {
+    // protected function updateVacancieRequest $req)
+    // {
 
-        $this->validate($req, [
-            "title" => "required|string",
-            "descirption" => "required|string",
-            "company" => "required|string",
-            "price" => "numeric",
-        ]);
-
-
-        $id = $req->input('id');
-        $title = $req->input('title');
-        $descirption = $req->input('descirption');
-        $company = $req->input('company');
-        $price = $req->input('price');
-
-        if ($req->input('fullTime') == "on") {
-            $fullTime = true;
-        }else{
-            $fullTime = false;
-        }
+    //     $this->validate($req, [
+    //         "title" => "required|string",
+    //         "descirption" => "required|string",
+    //         "company" => "required|string",
+    //         "price" => "numeric",
+    //     ]);
 
 
+    //     $id = $req->input('id');
+    //     $title = $req->input('title');
+    //     $descirption = $req->input('descirption');
+    //     $company = $req->input('company');
+    //     $price = $req->input('price');
 
-        $updated = DB::table('jobs')
-            ->where('id', $id)
-            ->update([
-                'title' => $title,
-                'descirption' => $descirption,
-                'company' => $company,
-                'price' => $price,
-                'fullTime' => $fullTime
-            ]);
+    //     if ($req->input('fullTime') == "on") {
+    //         $fullTime = true;
+    //     }else{
+    //         $fullTime = false;
+    //     }
 
 
-            return redirect('admin/Admin');
 
-    }
+    //     $updated = DB::table('vacancie')
+    //         ->where('id', $id)
+    //         ->update([
+    //             'title' => $title,
+    //             'descirption' => $descirption,
+    //             'company' => $company,
+    //             'price' => $price,
+    //             'fullTime' => $fullTime
+    //         ]);
+
+
+    //         return redirect('admin/Admin');
+
+    // }
   
 
 
-    // getUpdateJobs
+    // getUpdateVacancie
 }

@@ -22,11 +22,14 @@
                 
 
             <div class="flex-center position-ref full-height" >
-                <h1>insert a new company</h1>
+                <h1>insert </h1>
             
-                <form action="/admin/company/insert" method="post" enctype="multipart/form-data">
+                <form action="/vacancy/insert" method="post" enctype="multipart/form-data">
                     @csrf
-                    
+                    name
+                    <input type="text" name="name">
+                    description
+                    <input type="text" name="description">
                     
                      
                     <button type="submit" value="submit" name="submit">Insert</button>
@@ -48,45 +51,41 @@
             @endif
 
 
-            <h1>CRUD company</h1>
             
             <table class="table table-dark">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">code_id</th>
-                        <th scope="col">created at</th>
-                        <th scope="col">code_id</th>
+                        <th scope="col">name</th>
+                        <th scope="col">description</th>
+ 
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach($Company as $singleCompany)
+                        @foreach($Vacancy as $singleVacancy)
                     <tr>
                     
-                    <td>{{$singleCompany->id}}</td>
-                    <td>{{$singleCompany->name}}</td>
-                    <td>{{$singleCompany->code_id}}</td>
-                    <td>{{$singleCompany->createdAt}}</td>
-                    <td>{{$singleCompany->password}}</td>
+                    <td>{{$singleVacancy->id}}</td>
+                    <td>{{$singleVacancy->name}}</td>
+                    <td>{{$singleVacancy->description}}</td>
                  
                     
                
                 
                     
-                    <!-- <td>
-                        <a href="/admin/singleCompanys/update/{{$singleCompany->id}}">Update</a>
+                    <td>
+                        <a href="/vacancys/update/{{$singleVacancy->id}}">Update</a>
                     </td>
                     <td>
-                        <form action="/admin/singleCompanys/delete" method="post">
+                        <form action="/vacancy/delete/{{$singleVacancy->id}}" method="post">
                             @csrf
-                            <input type="hidden" value={{$singleCompany->id}} name="id">
+                            <input type="hidden" value={{$singleVacancy->id}} name="id">
                             <button >Delete</button>
                         </form>
         
                         
                         </td>
-                    </tr> -->
+                    </tr>
                     @endforeach
                 </tbody>
                 </table>

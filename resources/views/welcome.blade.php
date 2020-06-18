@@ -88,76 +88,9 @@
                     @endauth
                 </div>
             @endif
-
-            <div class="content" style="
-                width: 99vw;
-                height: 98vh;
-                margin-top: -2rem;
-                background-image: url('image/for_web.png');
-                background-size: 90%;
-                background-position: 113% center;
-                background-repeat: no-repeat;
-            ">
-
-            <div
-                class="text_conteiner"
-                style="
-                    position: absolute;
-                    transform: translateY(-50%);
-                    top: 48%;
-                    left: 10%;
-                    font-size: 20vw;
-                ">
-                <h1 style="
-                    font-size: 5vw;
-                    font-family: 'circular';
-                ">best place </h1>
-                <h1 style="
-                    font-size: 5vw;
-                    font-family: 'circular';
-                ">for web dev</h1>
-            </div>
-
-
-
-
-            </div>
-
-            <div class="content" style="
-                width: 99vw;
-                height: 98vh;
-                position: relative;
-
-            ">
-            <div class="content" style="
-                width: 100%;
-                height: 100%;
-                background-image: url('image/imac_finished.png');
-                background-size: cover;
-                background-position: -880% center;
-                background-repeat: no-repeat;
-                transform:scaleX(-1);
-            "></div>
-
-            <div
-                class="text_conteiner"
-                style="
-                    position: absolute;
-                    transform: translateY(-50%);
-                    top: 48%;
-                    right: 7%;
-                ">
-                <h1 style="
-                    font-size: 5vw;
-                    font-family: 'circular';
-                ">we have dev work </h1>
-                <h1 style="
-                    font-size: 5vw;
-                    font-family: 'circular';
-                ">in al areas</h1>
-            </div>
-
-            </div>
+            
+            <a href="/admin/Admin">admin</a> <br>
+            <a href="/login">company</a>
 
 
 

@@ -31,10 +31,20 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->isAdmin) {
-            return redirect('admin/Admin');
+        $user = DB::table('companies')
+            ->where('name',  $req->input('name'))
+            ->first();
+
+
+        if ($user) {
+            return redirect('/vacancy');
+        }else{
+            return redirect('/login');
+
         }
-        return redirect('jobs');
+
+
+        
     }
 
     /**
